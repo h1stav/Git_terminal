@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+#Заходим в папку
+cd dir_1
+#Создаем 3 папки
+mkdir folder_1 folder_2 folder_3
+#Заходим в любую папку
+cd folder_1
+#Создаем 5 файлов (3 txt и 2 json)
+touch test_1.txt test_2.txt test_3.txt js_1.json js_2.json
+#Создаем 3 папки
+mkdir folder_4 folder_5 folder_6
+#Вывести список
+ls -la
+#Перемещаем любые 2 файла, в любую папку
+mv test_1.txt test_2.txt folder_4/
+
+
+
+
+
+
