@@ -33,9 +33,9 @@ $ touch tf_1.txt
 
 ```
 $ cat > tf_2.txt
-- the first 1
-- the second 2
-- the thing 3
+the first 1
+the second 2
+the thing 3
 ```
 7. _Зайти в папку **inner_dir_1**_
 ```
@@ -83,7 +83,7 @@ $ ls
 ```
 Result
 ```
-tf_3.txt  tf_4.txt  tf_5.txt
+tf_3.txt  tf_4.txt  tF_5.txt
 ```
 17. _Выйти из папки **inner_dir_1**_
 ```
@@ -134,5 +134,153 @@ Result
 ./tf_1.txt
 ./tf_2.txt
 ```
-
-
+23. _Найти строки в файлах где есть комбинация букв **“sec”** в текущей папке_
+```
+$ grep "sec" *.*
+```
+Result
+```
+tf_2.txt:the second 2
+tf_2.txt:the sec 3
+```
+24. _Найти строки в файлах где есть комбинация букв **“sec”** в любом регистре в текущей папке_
+```
+$ grep -l "sec" *.*
+```
+Result
+```
+tf_2.txt
+```
+25. _Найти строки в файлах где есть только комбинация букв **“sec”** в текущей папке_
+```
+$ grep -rw "sec" *.*
+```
+Result
+```
+tf_2.txt:the sec 3
+```
+26. _Найти строки в файлах где есть только комбинация букв **“sec”** в любом регистре в текущей папке_
+```
+$ grep -rwi "sec" *.*
+```
+Result
+```
+tf_2.txt:the sec 3
+```
+27. _Найти строки в файлах где есть комбинация букв **“second”** в текущей папке_
+```
+$ grep -rw "second" *.*
+```
+Result
+```
+tf_2.txt:the second 2
+```
+28. _Найти строки в файлах где есть комбинация букв **“second”** в любом регистре в текущей папке_
+```
+$ grep -rwi "second" *.*
+```
+Result
+```
+tf_2.txt:the second 2
+tf_2.txt:the seConD 2
+```
+29. _Найти строки в файлах где есть комбинация букв **“second”** во всех папках ниже уровнем_
+```
+$ grep -rw "second" ./*/
+```
+Result
+```
+./inner_dir_1/tf_3.txt:the second 2
+```
+30. _Найти только путь и название файла в строках которых есть комбинация букв **“second”** в текущей папке_
+```
+$ grep -rl second *.*|xargs realpath
+```
+Result
+```
+/c/Users/Денис/Desktop/terminal/dir_1/tf_2.txt
+```
+31. _Найти все строки во всех файлах где нет комбинации **“second”**_
+```
+$ grep -rv "second"
+```
+Result
+```
+inner_dir_1/tf_3.txt:I'm waling up to ash and dust
+inner_dir_1/tf_3.txt:I'm wipe my brow and sweat my rust
+inner_dir_1/tf_3.txt:I'm breathing in the chemicals
+inner_dir_1/tf_3.txt:the sec 2
+inner_dir_1/tf_3.txt:the SeCoNd 2
+tf_2.txt:the first 1
+tf_2.txt:the thing 3
+tf_2.txt:the sec 3
+tf_2.txt:the seConD 2
+```
+32. _Найти только название и путь к файлам где нет комбинации **“second”**_
+```
+$ grep -rvl second |xargs realpath
+```
+Result
+```
+/c/Users/Денис/Desktop/terminal/dir_1/inner_dir_1/tf_3.txt
+/c/Users/Денис/Desktop/terminal/dir_1/tf_2.txt
+```
+33. _Вывести в терминал 4 последних строк любого текстового файла_
+```
+$ tail -n 4 inner_dir_1/tf_3.txt
+```
+Result
+```
+I'm breathing in the chemicals
+the second 2
+the sec 2
+the SeCoNd 2
+```
+34. _Вывести в терминал 4 первые строки любого текстового файла_
+```
+$ head -n 4 inner_dir_1/tf_3.txt
+```
+Result
+```
+I'm waling up to ash and dust
+I'm wipe my brow and sweat my rust
+I'm breathing in the chemicals
+the second 2
+```
+35. _Команда в одну строку. Создать папку и создать текстовый файл с содержимым_
+```
+$ mkdir one && cat >> one.txt
+Iphone
+Ipad
+ipod
+airpods
+```
+36. _Команда в одну строку. Переместить в любую одну папку текстовые файлы у которых в содержимом есть слово **“sec”**_
+```
+$ grep -rwl sec | xargs mv -t inner_dir_1
+```
+37. _Команда в одну строку. Скопировать в любую одну папку текстовые файлы у которых в содержимом есть слово **“sec”**_
+```
+$ grep -rwl sec | xargs cp -t inner_dir_1
+```
+Result
+```
+cp: 'inner_dir_1/tf_2.txt' and 'inner_dir_1/tf_2.txt' are the same file
+cp: 'inner_dir_1/tf_3.txt' and 'inner_dir_1/tf_3.txt' are the same file
+```
+38. _Команда в одну строку. Найти все строки c **“sec”** во всех текстовых файлах, скопировать и вставить эти строки в один новый созданный текстовый файл_
+````
+$ grep -rwl sec >>new.txt
+```
+39. _Команда в одну строку. Удалить текстовые файлы у которых в содержимом есть слово **“sec”**_
+```
+$ grep -rwl sec |xargs rm
+```
+40. _Просто вывести в терминал строку **“Good job!!”**_
+```
+$ echo 'Good Job!!'
+```
+Result
+```
+Good Job!!
+```
