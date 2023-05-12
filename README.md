@@ -1,1 +1,1 @@
-# Git_terminal
+# README в каждой папке homework
